@@ -19,3 +19,6 @@ This dashboard serves as only a starting point for looking at the causes and tre
 * Depression has different frequencies depending upon the stratiication and state.
 * Many social behaviors such as diet, tobacco use, and economic status offer predictive power for depression.
 * Further work and data is needed to provide more accurate long term predictions and unravel the social factors that contribute to mental illness.
+
+# Future Work
+In the future, we hope to include more recent data to update our graphs and models. Our data contains timepoints during the COVID-19 pandemic. Therefore, it would be beneficial to see if the trends and predictions from this dashboard are shown to remain constant despite the passage of time. 
