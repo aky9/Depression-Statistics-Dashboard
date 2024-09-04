@@ -4,7 +4,7 @@ This repository contains an exploratory dashboard developed as part of a group p
 
 
 # Key Features of the Dashboard:
-*Data Visualization: Interactive graphs display the relationship between depression and health factors such as smoking, obesity, binge drinking, and more.
-*Model Evaluation: Evaluate the performance of predictive models with metrics like MSE and R².
-*Feature Importance: Visual representations of which factors most significantly impact depression.
-*Depression Rate Prediction: Customize predictions for future depression rates using filters for year, location, and demographic groups.
+* Data Visualization: Interactive graphs display the relationship between depression and health factors such as smoking, obesity, binge drinking, and more.
+* Model Evaluation: Evaluate the performance of predictive models with metrics like MSE and R².
+* Feature Importance: Visual representations of which factors most significantly impact depression.
+* Depression Rate Prediction: Customize predictions for future depression rates using filters for year, location, and demographic groups.
