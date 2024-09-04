@@ -26,7 +26,7 @@ def load_figure_from_pickle(filename):
 # Example usage:
 kmeans_plot = load_figure_from_pickle('figure.pickle')
 
-wei_df = pd.read_csv("WEI_DATA.csv")
+wei_df = pd.read_csv("W_DATA.csv")
 gp_data = GP_data()
 
 # missing data plot
@@ -173,8 +173,8 @@ fig_bubble.update_layout(xaxis_title="Year",
 
 
 # Load and prepare data
-df = pd.read_csv('KANE_DATA.csv')
-depression_data = load_depression_data("WEI_DATA.csv")
+df = pd.read_csv('K_DATA.csv')
+depression_data = load_depression_data("W_DATA.csv")
 depression_model = fit_logistic_regression(depression_data)
 
 # Load models and scaler
