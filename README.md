@@ -12,7 +12,7 @@ This repository contains an exploratory dashboard developed as part of a group p
 # How to Use This Dashboard:
 Navigate through various sections using the menu options. Select different health factors from the dropdown menus to view their correlation with depression rates on the graphs. Use the control panels to adjust parameters and make predictions based on your interests and needs. We encourage you to explore the data, uncover insights, and consider how this information can be used to influence health policies and individual practices. 
 
-#Conclusion
+# Conclusions
 This dashboard serves as only a starting point for looking at the causes and trends of depression in the US. From our analysis we come to the following conclusions:
 
 * Rates of depression are increasing.
