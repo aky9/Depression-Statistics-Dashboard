@@ -247,6 +247,7 @@ server = app.server
 app.layout = html.Div([
     html.Div([
         html.H1("Predicting Depression from Health Statistics"),
+        html.H3('Authors: Wei-Jie Zhou, Alxandr Kane York, and Aidan Murphy'),
         html.P("This interactive dashboard is designed to explore and analyze health-related data with a focus on understanding how various factors correlate with adult depression. Our goal is to provide a exploratory tool to assess the impact of different health behaviors and social factors, and predict future rates of depression based on historical data."),
         html.H3("Key Features of the Dashboard:"),
         html.Ul([
@@ -262,8 +263,9 @@ app.layout = html.Div([
 
     html.Div([
         html.H2("Exploratory Data Analysis for the Chronic Disease Indicators Dataset"),
-        html.P("This exploratory data analysis (EDA) focuses specifically on the topics social determinants of health and mental health."),
-        html.H3("What is the missing mechanism for missing data?"),
+        html.P("This exploratory data analysis (EDA) focuses specifically on social behaviors and mental health statistics and their relationship with depression. We will showcase some visualizations that provide possible patterns among these variables."),
+        html.P("It's important to keep in mind, however, that visualizations alone are not sufficient enough to make definitive claims about a connection between a given variable and depression. Statistical analyses later in the dashbroad attempt to address this.")
+        html.H3("What is the mechanism for missing data?"),
         html.P("Consider the following diagram which shows the missing value heatmap:"),
         dcc.Graph(figure = missing),
         html.P("In this visualization, yellow represents non-missing (present) data, and blue represents missing data points. The columns of the heatmap correspond to different variables or features within the dataset. We can see that certain features have fulling missing data or at least have sporadic missing data: this may imply that the data is missing at random rather than systematically. This heatmap serves as a useful diagnostic tool to identify patterns of missing data, and we can now drop the fully missing columns and proceed with our analysis."),
@@ -273,14 +275,14 @@ app.layout = html.Div([
         html.P("We are using a data set with multiple columns, in which some of them my be highly correlated if not the same. This may cause numerical instability within our predictions and estimations. Hence, we applied a k-means analysis to see the distribution of the data."),
         html.P("What we observed was that the clustering features was strong, meaning that the data is not completely random and can be clustered with little error. In fact, when running a regression on the clusters with stratification as the dependent variable, the clusters (which now act like features in the regression) actually could explain 94% of the variability within the stratification! (R^2 of 0.937)."),
 
-        html.H3("What state is the most depressed?"),
+        html.H3("What state/territory is the most depressed?"),
         dcc.Dropdown(
             id='stratification-dropdown-depression',
             options=[{'label': strat, 'value': strat} for strat in depression_data['Stratification1'].cat.categories],
             value='Overall'  # Default value
         ),
         dcc.Graph(id='depression-graph'),
-        html.P("We now begin to ask some questions about the content of the data. As our analysis is focused on mental health and depression, our first question would be which state is the most depressed? We have constructed a series of graphs that show the depression rate for each state given a certain stratification. What we noticed in the graphs was the Maine, Tenessee, and West Virginia were usually among the top depressed states. For the least depressed states, we typically saw Hawaii and Nebraska. These seem to line up with the literature and studies very well."),
+        html.P("We now begin to ask some questions about the content of the data. As our analysis is focused on mental health and depression, our first question would be which state is the most depressed? We have constructed a series of graphs that show the depression rate for each state given a certain stratification. What we noticed in the graphs was the Maine, Tenessee, and West Virginia were usually among the top depressed states. For the least depressed states, we typically saw Hawaii and Nebraska. These seem to line up with past trends."),
 
 
         html.H3("What state has the highest number of mentally unhealthy days?"),
@@ -291,7 +293,6 @@ app.layout = html.Div([
         ),
         dcc.Graph(id='mental-unhealthy-days-choropleth'),
         html.P("Another statistic that is of interest is the average number of mentally unhealthy days someone experiences within a month, which we have visualized in this map. We once again noticed that West Virginia and Tenessee are among the states that have the highest number of mentally unhealthy days, with our state with the least number of unhealthy days being Nebraska. This reaffirms our conclusion from the last diagram."),
-        html.P("An unexpected result we found suprising was that Asian non-hispanics had on average the least number of mentally unhealthy days."),
 
 
 
@@ -309,11 +310,11 @@ app.layout = html.Div([
 
         html.H3("What state had the highest high school completion rates?"),
         dcc.Graph(figure = fig_high_school),
-        html.P("In addition to the length between checkups, we also plot the average highschool completion rates, another lifestyle factor that may be related to depression rates among adults. Suprisingly, Nebraska, a state with low depression rates, has a low high school completion rate, while West Virginia, a state with high levels of depression, had a comparatively high depression rate. In addition, we see that New Mexico (a state with a low amount of doctor checkups), has a low high school completion rate. This plot may indicate that high school completion rates have no correlation with depression among adults, however we may cannot conclude such correlation without further investigation."),
+        html.P("In addition to the length between checkups, we also plot the average highschool completion rates, another lifestyle factor that may be related to depression rates among adults. Suprisingly, Nebraska, a state with low depression rates, has a low high school completion rate, while West Virginia, a state with high levels of depression, had a comparatively high depression rate. In addition, we see that New Mexico (a state with a low amount of doctor checkups), has a low high school completion rate. This plot may indicate that high school completion rates have no correlation with depression among adults, however we may cannot make any definitive conclusions without further investigation."),
 
         html.H3("What demographics have the highest percentage of poverty?"),
         dcc.Graph(figure = fig_violin),
-        html.P("We now plot the demographics that have the most severe poverty rates, i.e. being 150% below the poverty threshold given already below the poverty threshold. One way to interpret this visualization is the percentage of severely impoverished given that they are already impoverished. We note that American Indian and Alaska Native seems to have the overall highest poverty rates, along with Black, Hispanic, and Hawaiian or Pacific Islanders. On the other side of the spectrum, Asian and White had the lowest rates of severe poverty. Once again, this seems to align with the literature very well."),
+        html.P("We now plot the demographics that have the most severe poverty rates, i.e. being 150% below the poverty threshold given already below the poverty threshold. One way to interpret this visualization is the percentage of severely impoverished given that they are already impoverished. We note that American Indian and Alaska Native seems to have the overall highest poverty rates, along with Black, Hispanic, and Hawaiian or Pacific Islanders. On the other side of the spectrum, Asian and White had the lowest rates of severe poverty. Once again, this seems to align with past data."),
 
         html.H3("What demographics have the highest percentage of unemployment?"),
         dcc.Graph(figure = fig_unemployment),
@@ -331,8 +332,8 @@ app.layout = html.Div([
                 question
             )
         ) for question in unique_questions if question != "Current poor mental health among high school students"],
-        html.P("Overall, even when looking at different measures of depression, the trend appears to be an increase. One obvious explanation, given the years we are considering, is that the pandemic exacerbated many mental health struggles. We can see the rates of depression and other mental health issues reach a low during 2020, however spike drastically in the following years. Nonetheless, it is interesting to look at how various social factors and behaviors correlate to depression."),
-        html.P("One interesting observation is that the number of Post Partum depressive symptoms among women with a recent live birth seemed to have waned after 2020, i.e. increased at a slower rate. This is interesting to note, as the number of US births significantly decreased after 2020 (the year of the pandemic). Of course further investagtion must be done to determine if there exists a correlation between these two observations, and nothing can be concluded without more research."),
+        html.P("Overall, even when looking at different measures of depession, the trend appears to be an increase. One obvious explanation, given the years we are considering, is that the pandemic exacerbated many mental health struggles. We can see the rates of depression and other mental health issues reach a low during 2020, however spike drastically in the following years. Nonetheless, it is interesting to look at how various social factors and behaviors correlate to depression."),
+        html.P("One interesting observation is that the number of post-partum depressive symptoms among women with a recent live birth seemed to have waned after 2020 (i.e. increased at a slower rate). This is interesting to note, as the number of US births significantly decreased after 2020 (the year of the pandemic). Of course further investagtion must be done to determine if there exists a correlation between these two observations."),
 
         
     ], className="EDA", style={'width': '60%', 'height': '50%', 'margin': '0 auto'}),
@@ -340,7 +341,7 @@ app.layout = html.Div([
 
     html.Div([
         html.H2('Relationships Between Various Health Behaviours and Depression'),
-        html.P("We now pivot to looking at various health behaviors and their relationships to depression."),
+        html.P("We now pivot to looking at various health behaviors and their relationships to depression as opposed to looking at them isolation."),
         html.H3("Correlation Heatmap"),
         dcc.Graph(figure=heatmap_figure),
         html.P("Given the vareity of social factors in the data set, it is natural to wonder which correlate or predict depression rates. Above is a correlation heatmap for various social factors and rates of adult depression. These features were chosen based on data completeness and observed correlations."),
@@ -371,7 +372,7 @@ app.layout = html.Div([
         "We now present tools designed to predict and forcast different mental health statistics of individuals likely to suffer from depression based on demographic and geographical factors."
     ]),
     html.P([
-        "This predictive tool takes into account various inputs, such as an individual's state of residence and demographic group. By analyzing historical trends and patterns, the tool can forecast depression rates."
+        "These predictive tools take into account various inputs, such as an individual's state of residence and demographic group. By analyzing historical trends and patterns, the tool can forecast depression rates."
     ]),
     html.P([
         "We encourage users to explore different scenarios by selecting their state and demographic group, thereby gaining personalized insights into the prevalence of depression within various communities."
@@ -454,8 +455,8 @@ app.layout = html.Div([
 
 
         html.H2("Feature Analysis and Data Reduction"),
-        html.P("In addition our predictions, we've chosen to leverage three different predictive modeling techniques: Linear Regression, Random Forest Regression, and XGBoost. Each model offers unique features that cater to various aspects of our data and can give diverse insights into its underlying patterns."),
-        html.P("In particular, we use Linear Regression, XGBoost, and RandomForest to identify feature importance when predicting percentage of adults who are mentally unhealthy."),
+        html.P("In addition to the above tools, we've chosen to leverage three additional predictive modeling techniques and test their performance"),
+        html.P("In particular, we use Linear Regression, XGBoost, and RandomForest. Afterwards, we attempt to provide insight into the important factors contributing to depression rates"),
 ], className="model-explanation", style={'width': '60%', 'height': '50%', 'margin': '0 auto'}),
 
 
